@@ -1,0 +1,30 @@
+{
+  "name": "currency-converter",
+  "version": "1.0.0",
+  "description": "A simple javascript Progressive Web App that consumes the currency converter API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server",
+    "babel": "babel --presets es2015 index.js -o build/main.bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeraDeveloper/currency-converter.git"
+  },
+  "author": "Chidera Nwoke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeraDeveloper/currency-converter/issues"
+  },
+  "homepage": "https://github.com/DeraDeveloper/currency-converter#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "lite-server": "^2.4.0"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
