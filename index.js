@@ -1,5 +1,5 @@
 
- navigator.serviceWorker.register('/sw/index.js').then(function(reg) {
+ navigator.serviceWorker.register('/sw/index.js').then((reg) => {
     console.log("service-worker registered");
   });
   

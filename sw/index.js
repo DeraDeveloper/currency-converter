@@ -1,8 +1,42 @@
+let staticCacheName = 'dera-static';
+let contentImgsCache = 'dera-content-imgs';
+let allCaches = [
+  staticCacheName,
+  contentImgsCache
+];
+
+self.addEventListener('install', (event) => {
+	console.log("installing...");
+  event.waitUntil(
+    caches.open(staticCacheName).then(function(cache) {
+      return cache.addAll([
+        'index.js',
+      ]);
+    })
+  );
+});
+
+self.addEventListener('activate', function(event) {
+	console.log("activating.........");
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName.startsWith('dera-') &&
+                 !allCaches.includes(cacheName);
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
+});
+
 self.addEventListener('fetch', function(event) {
+	console.log("fetching;;;;");
+	console.log(event.request.url);
   var requestUrl = new URL(event.request.url);
 
-  console.log("fetch");
-  
   if (requestUrl.origin === location.origin) {
     if (requestUrl.pathname === '/') {
       event.respondWith(caches.match('/skeleton'));
@@ -19,3 +53,10 @@ self.addEventListener('fetch', function(event) {
       return;
     }
   }
+
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
